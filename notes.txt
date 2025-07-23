@@ -1,0 +1,171 @@
+WHERE:
+
+The error occurs because you cannot use an alias (total_order_amount or avg_order_amount) in the WHERE clause. The SQL engine evaluates the WHERE clause before computing aggregate functions like SUM() and AVG(), so aliases don't exist yet at that stage.
+
+
+where sum() > avg()
+------------------------------------------------------------------------------------------------------------------
+
+
+*
+floor() -> rounds down
+round(5.789,2) -> 5.78
+------------------------------------------------------------------------------------------------------------------
+
+* 
+use join ___ on column1 = range 
+
+eg. 	FROM Students
+	JOIN Grades
+	on Students.Marks between Min_Mark and Max_Mark
+------------------------------------------------------------------------------------------------------------------
+
+* ORDER
+SELECT DISTINCT column, AGG_FUNC(column_or_expression), …
+FROM  
+JOIN  
+ON     
+WHERE  
+GROUP  
+HAVING  
+ORDER BY  ASC/DESC
+LIMIT count OFFSET COUNT;
+------------------------------------------------------------------------------------------------------------------
+
+* MULTIPLE SELECT
+------------------------------------------------------------------------------------------------------------------
+
+*CASE
+
+SELECT customer_id, first_name,
+    CASE
+	when cast( ____ as new_data_type) then ___   => convert to different datatype
+        WHEN condition1 THEN result1
+        WHEN condition2 THEN result2
+        -- Add more WHEN conditions and results as needed
+        ELSE else_result
+    END AS alias_name
+FROM table_name;
+
+==============================
+count(select ---) => WRONG
+count(distinct c.column_name)
+==============================
+
+------------------------------------------------------------------------------------------------------------------
+
+*UNION
+
+union all = includes duplicate
+union = no duplicate
+
+select ____
+from _____
+UNION
+select _____
+from ______
+
+------------------------------------------------------------------------------------------------------------------
+*HAVING
+
+When need to filter based on min, max, count, avg etc.
+
+------------------------------------------------------------------------------------------------------------------
+
+*LIMIT & OFFSET
+select __
+from __
+limit X offset Y;
+------------------------------------------------------------------------------------------------------------------
+* IN & NOT IN
+
+IN (value1, value2, ...)
+NOT IN (value1, value2, ...)
+
+------------------------------------------------------------------------------------------------------------------
+
+*EXISTS
+
+SELECT ____
+FROM ____
+WHERE EXISTS (
+	SELECT __
+	FROM __
+	WHERE ...
+)
+
+------------------------------------------------------------------------------------------------------------------
+* CTE
+
+WITH made_up_name AS (
+	SELECT __
+	FROM __
+	JOIN . . .
+)  
+SELECT . . . 
+------------------------------------------------------------------------------------------------------------------
+* BETWEEN = always with where
+
+WHERE ____ BETWEEN value1 AND value2
+
+value = 'I' and 'L'
+value = 200 and 300
+------------------------------------------------------------------------------------------------------------------
+*SUBQUERY
+1)Inside where = used to filter records based on another query
+SELECT ___
+FROM ____
+WHERE ___ IN(
+	SELECT ...
+)
+
+2) Inside from = temporary table for query
+SELECT ___
+FROM (
+	SELECT
+)AS ____
+
+3) Inside select = compute values dynamically
+SELECT ___, (SELECT COUNT(*) . .  .)
+
+4)Inside having = to filter aggregates
+SELECT ___
+FROM ____
+HAVING ()
+
+
+------------------------------------------------------------------------------------------------------------------
+
+REPLACE(col_name, val_to_replace, replacement) = to remove specific characters from columns or strings
+
+------------------------------------------------------------------------------------------------------------------
+
+Fill with Mean: Useful for numerical columns that follow a normal distribution (bell curve).
+    Fill with Median: Better for numerical columns with outliers or skewed data.
+    Fill with Mode: Best for categorical columns.
+
+Univariate Analysis for Numerical Columns
+    Histogram: Shows the frequency distribution of the values.
+    KDE (Kernel Density Estimate) Plot: A smoothed version of the histogram to visualize the probability density.
+    Boxplot: Displays the distribution and highlights outliers.
+
+Univariate Analysis for Categorical Columns
+    Countplot: Shows the frequency count of each category.
+    Pie Chart: Shows proportions of categories in a pie format (less commonly used in data science).
+   .value_counts() to summarize the frequency of categories
+    Summary of Bivariate Analysis
+##
+    Used scatter plots and heatmaps for numerical vs numerical analysis.
+    Used boxplots and violin plots for numerical vs categorical comparisons.
+    Used grouped bar plots and mosaic plots for categorical vs categorical comparisons.
+
+🛠 Key Functions for Initial Exploration
+
+    df.head(): Displays the first few rows of the dataset to give you a quick preview.
+    df.shape: Returns the number of rows and columns in the dataset.
+    df.info(): Provides details about the columns, their data types, and the number of non-null (non-missing) values.
+    df.describe(): Provides summary statistics (mean, median, min, max, etc.) for numerical columns.
+    df.columns: Lists the names of all columns in the dataset.
+    df.nunique(): Returns the number of unique values in each column.
+    df.duplicated(): Checks for duplicate rows.
+
